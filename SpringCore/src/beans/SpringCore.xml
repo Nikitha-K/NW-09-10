@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+			
+	<bean class = "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name = "Location" value = "beans/database.properties"></property>
+	</bean>		
+			
+	<bean id="log" class = "beans.Login">
+		<property name = "username" value = "${db.username}"></property>
+		<property name = "password" value = "${db.password}"></property>
+	</bean>
+		
+	
+	<bean id="emp" class="beans.Employee" scope = "prototype" init-method = "start" destroy-method = "stop"> 
+		<property name="empno" value = "1222"></property>
+		<property name="salary" value = "41000"></property>
+		<property name="job" value = "Tester"></property>
+		<property name="skills">
+		
+			<list>
+				
+				<value>Java</value>
+				<value>Spring</value>
+				<value>Oracle</value>
+			
+			</list>
+		</property>
+		
+		
+	</bean>
+	
+		
+	<bean id="std" class="beans.Student"> 
+	
+		<!-- Manual Wiring -->
+		
+		<constructor-arg name = "regno" value = "231323"></constructor-arg>
+		<constructor-arg name = "stdname" value = "Nikitha"></constructor-arg> 
+		
+		 <property name="regno" value = "78223"></property>
+		<property name="stdname" value = "Srinivas"></property> 
+		<property name="addr" ref = "addr"></property>
+		
+	</bean>
+	
+	<bean id="addr" class="beans.Address"> 
+	
+		<property name="street" value = "HiTech City"></property>
+		<property name="city" value = "Hyderabad"></property>
+		
+	</bean>
+	
+</beans>
